@@ -7,7 +7,7 @@
     <ul>
       <li v-for="task in taskList" :key="task.id">
         {{ task.title }}
-        <button @click.prevent="deleteTask(task.id)"> del </button>
+        <button class="taskList_delete" @click.prevent="deleteTask(task.id)"> del </button>
       </li>
     </ul>
   </div>
@@ -64,5 +64,16 @@ export default {
     & input {
       margin: 1em  0;
     }
+  }
+  .taskList_delete {
+    border: none;
+    border-radius: 12px;
+    background-color: #ff6224;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0.3em 1em;
+    cursor: pointer;
+    letter-spacing: 0.5px;
   }
 </style>
