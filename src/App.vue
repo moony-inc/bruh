@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <TaskEditor></TaskEditor>
+    <UserProfile></UserProfile>
   </div>
 </template>
 
 <script>
-import TaskEditor from './components/TaskEditor.vue'
+import UserProfile from './components/UserProfile.vue'
 
 export default {
   name: 'App',
-  components: { TaskEditor },
+  components: {
+    UserProfile,
+  },
 }
 </script>
