@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="TaskEditor">
     <form class="inputWrapper">
       <input v-model="task" type="text">
       <button @click.prevent="addItem" type="submit"> Submit </button>
