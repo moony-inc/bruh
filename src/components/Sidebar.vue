@@ -5,10 +5,10 @@
       <p class="sidebar_username">John Doe</p>
     </div>
     <div class="sidebar_main">
-      <div class="sidebar_profile">Profile</div>
-      <div class="sidebar_messages">Messages</div>
-      <div class="sidebar_settings">Settings</div>
-      <div class="sidebar_logout">Log Out</div>
+      <div class="sidebar_profile"><p>Profile</p></div>
+      <div class="sidebar_messages"><p>Messages</p></div>
+      <div class="sidebar_settings"><p>Settings</p></div>
+      <div class="sidebar_logout"><p>Log Out</p></div>
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@
 export default {
   data() {
     return {
+      username: 'John Doe',
     }
   },
   methods: {
@@ -27,7 +28,7 @@ export default {
 <style lang="scss">
   .Sidebar {
     height: 100vh;
-    position: fixed;
+    min-width: max-content;
     width: 20vw;
     background-color: #181818;
     resize: horizontal;
@@ -38,6 +39,7 @@ export default {
   }
   .sidebar_username {
     color: #fff;
+    user-select: none;
   }
   .user_img-sm {
     width: 50px;
@@ -49,14 +51,16 @@ export default {
     display: flex;
     flex-direction: column;
     & div {
-      padding: 0.5em 2em;
-      color: #fff;
+      font-size: 17px;
+      padding: 0 2em;
+      color: rgb(199, 199, 199);
       transition: 300ms;
       user-select: none;
       cursor: pointer;
       &:hover {
         transition: 300ms;
         transform: scale(1.05);
+        color: #fff;
       }
     }
   }

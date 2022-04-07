@@ -2,11 +2,18 @@
   <div class="UserProfile">
     <div class="user_avatar-wrapper">
       <img src="../assets/img/user_blank.jpg" alt="" class="user_avatar">
-      <p class="username">John Doe</p>
+      <p class="username">{{ username }}</p>
     </div>
     <div class="user_bio-wrapper">
-      <p class="user_bio-text">I did not choose to be a doe, but i am a doe.</p>
+      <p class="user_bio-text">{{ user_bio }}</p>
     </div>
+    <ul>
+      <li v-for="doge in doges" :key="doge in doges">
+        {{ doge.text }}
+      </li>
+      <button v-on:click="hiddenDogge">show me doge</button>
+    </ul>
+    <img v-if="hidden" src="../assets/img/hiddenDoge.gif" alt="">
   </div>
 </template>
 
@@ -14,9 +21,20 @@
 export default {
   data() {
     return {
+      username: 'John Doe',
+      user_bio: 'I did not choose to be a doe, but i am a doe.',
+      hidden: false,
+      doges: [
+        { text: 'click' },
+        { text: 'for' },
+        { text: 'doge' },
+      ],
     }
   },
   methods: {
+    hiddenDogge() {
+      this.hidden = true
+    },
   },
 }
 </script>
@@ -24,6 +42,7 @@ export default {
 <style scoped lang="scss">
   .UserProfile {
     background-color: #c0c0c0;
+    width: 100%;
   }
   .user_avatar-wrapper {
     display: flex;
@@ -46,6 +65,7 @@ export default {
     color: #fff;
   }
   .user_bio-wrapper {
+    display: flex;
     padding: 0.3em 3em;
     background-color: #313131;
     color: #fff;

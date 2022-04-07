@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <UserProfile></UserProfile>
-    <Sidebar></Sidebar>
+    <MainPage></MainPage>
   </div>
 </template>
 
 <script>
-import UserProfile from './components/UserProfile.vue'
-import Sidebar from './components/Sidebar.vue'
+import MainPage from './components/MainPage.vue'
 
 export default {
   name: 'App',
   components: {
-    UserProfile,
-    Sidebar,
+    MainPage,
   },
 }
 </script>
+
+<style lang="scss">
+</style>
