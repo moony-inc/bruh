@@ -9,11 +9,11 @@
     </div>
     <ul>
       <li v-for="doge in doges" :key="doge in doges">
-        {{ doge.text }}
+        {{ doge }}
       </li>
       <button v-on:click="hiddenDogge">show me doge</button>
     </ul>
-    <img v-if="hidden" src="../assets/img/hiddenDoge.gif" alt="">
+    <img v-if="isDogeVisible" src="../assets/img/hiddenDoge.gif" alt="">
   </div>
 </template>
 
@@ -23,17 +23,17 @@ export default {
     return {
       username: 'John Doe',
       user_bio: 'I did not choose to be a doe, but i am a doe.',
-      hidden: false,
+      isDogeVisible: false,
       doges: [
-        { text: 'click' },
-        { text: 'for' },
-        { text: 'doge' },
+        'click',
+        'for',
+        'doge',
       ],
     }
   },
   methods: {
     hiddenDogge() {
-      this.hidden = true
+      this.isDogeVisible = true
     },
   },
 }

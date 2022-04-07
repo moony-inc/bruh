@@ -2,7 +2,7 @@
   <div class="Sidebar">
     <div class="sidebar_header">
       <img src="../assets/img/user_blank.jpg" alt="" class="user_img-sm">
-      <p class="sidebar_username">John Doe</p>
+      <p class="sidebar_username">{{ username }}</p>
     </div>
     <div class="sidebar_main">
       <div class="sidebar_profile"><p>Profile</p></div>
