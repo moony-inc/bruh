@@ -2,7 +2,10 @@
   <div class="UserProfile">
     <div class="user_avatar-wrapper">
       <img src="../assets/img/user_blank.jpg" alt="" class="user_avatar">
-      <p>John Doe</p>
+      <p class="username">John Doe</p>
+    </div>
+    <div class="user_bio-wrapper">
+      <p class="user_bio-text">I did not choose to be a doe, but i am a doe.</p>
     </div>
   </div>
 </template>
@@ -27,11 +30,25 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3em 0;
+    padding-top: 3em;
+    background-image: url(../assets/img/user_background.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .user_avatar {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+  }
+  .username {
+    font-size: 34px;
+    user-select: none;
+    color: #fff;
+  }
+  .user_bio-wrapper {
+    padding: 0.3em 3em;
+    background-color: #313131;
+    color: #fff;
+    box-shadow: 0px 5px 10px 5px rgba($color: #181818, $alpha: 1.0);
   }
 </style>
