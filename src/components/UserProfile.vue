@@ -12,13 +12,6 @@
         <span v-else class="lnr lnr-chevron-down-circle"></span>
       </button>
     </div>
-    <ul>
-      <li v-for="doge in doges" :key="doge">
-        {{ doge }}
-      </li>
-      <button v-on:click="toggleDoggeVisibility">show me doge</button>
-    </ul>
-    <img v-if="isDogeVisible" src="@/assets/img/hiddenDoge.gif" alt="">
   </div>
 </template>
 
@@ -28,19 +21,10 @@ export default {
     return {
       username: 'John Doe',
       user_bio: 'I did not choose to be a doe, but i am a doe.',
-      isDogeVisible: false,
-      doges: [
-        'click',
-        'click',
-        'click',
-      ],
       isBioEditing: false,
     }
   },
   methods: {
-    toggleDoggeVisibility() {
-      this.isDogeVisible = !this.isDogeVisible
-    },
     toggleBioEditing() {
       this.isBioEditing = !this.isBioEditing
     },
