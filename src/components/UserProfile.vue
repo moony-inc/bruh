@@ -7,7 +7,7 @@
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
       <input v-else v-model="user_bio" type="text">
-      <button @click="editBio">
+      <button @click="toggleBioEditing">
         <span v-if="!isBioEditing" class="lnr lnr-pencil"></span>
         <span v-else class="lnr lnr-chevron-down-circle"></span>
       </button>
@@ -41,7 +41,7 @@ export default {
     toggleDoggeVisibility() {
       this.isDogeVisible = !this.isDogeVisible
     },
-    editBio() {
+    toggleBioEditing() {
       this.isBioEditing = !this.isBioEditing
     },
   },

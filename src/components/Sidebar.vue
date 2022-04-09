@@ -5,7 +5,7 @@
       <p class="sidebar_username">{{ username }}</p>
     </div>
     <div class="sidebar_main">
-      <div v-for="item in sidebarItems" :key="item.name">
+      <div v-for="item in sidebarButtons" :key="item.name">
         <span :class="item.icon"></span>
         {{ item.name }}
       </div>
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       username: 'John Doe',
-      sidebarItems: [
+      sidebarButtons: [
         { name: 'Profile', icon: 'lnr lnr-user' },
         { name: 'Messages', icon: 'lnr lnr-envelope' },
         { name: 'Settings', icon: 'lnr lnr-eye' },
