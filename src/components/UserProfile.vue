@@ -1,14 +1,14 @@
 <template>
   <div class="UserProfile">
     <div class="user_avatar-wrapper">
-      <img src="../assets/img/user_blank.jpg" alt="" class="user_avatar">
+      <img src="@/assets/img/user_blank.jpg" alt="" class="user_avatar">
       <p class="username">{{ username }}</p>
     </div>
     <div class="user_bio-wrapper">
-      <p v-if="isBioEditing==false" class="user_bio-text">{{ user_bio }}</p>
+      <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
       <input v-else v-model="user_bio" type="text">
       <button @click="editBio">
-        <span v-if="isBioEditing==false" class="lnr lnr-pencil"></span>
+        <span v-if="!isBioEditing" class="lnr lnr-pencil"></span>
         <span v-else class="lnr lnr-chevron-down-circle"></span>
       </button>
     </div>
@@ -16,7 +16,7 @@
       <li v-for="doge in doges" :key="doge">
         {{ doge }}
       </li>
-      <button v-on:click="hiddenDogge">show me doge</button>
+      <button v-on:click="toggleDoggeVisibility">show me doge</button>
     </ul>
     <img v-if="isDogeVisible" src="@/assets/img/hiddenDoge.gif" alt="">
   </div>
@@ -38,7 +38,7 @@ export default {
     }
   },
   methods: {
-    hiddenDogge() {
+    toggleDoggeVisibility() {
       this.isDogeVisible = !this.isDogeVisible
     },
     editBio() {

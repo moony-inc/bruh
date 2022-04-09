@@ -1,11 +1,11 @@
 <template>
   <div class="Sidebar">
     <div class="sidebar_header">
-      <img src="../assets/img/user_blank.jpg" alt="" class="user_img-sm">
+      <img src="@/assets/img/user_blank.jpg" alt="" class="user_img-sm">
       <p class="sidebar_username">{{ username }}</p>
     </div>
     <div class="sidebar_main">
-      <div v-for="item in sidebar" :key="item.name">
+      <div v-for="item in sidebarItems" :key="item.name">
         <span :class="item.icon"></span>
         {{ item.name }}
       </div>
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       username: 'John Doe',
-      sidebar: [
+      sidebarItems: [
         { name: 'Profile', icon: 'lnr lnr-user' },
         { name: 'Messages', icon: 'lnr lnr-envelope' },
         { name: 'Settings', icon: 'lnr lnr-eye' },
