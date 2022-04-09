@@ -5,15 +5,20 @@
       <p class="username">{{ username }}</p>
     </div>
     <div class="user_bio-wrapper">
-      <p class="user_bio-text">{{ user_bio }}</p>
+      <p v-if="isBioEditing==false" class="user_bio-text">{{ user_bio }}</p>
+      <input v-else v-model="user_bio" type="text">
+      <button @click="editBio">
+        <span v-if="isBioEditing==false" class="lnr lnr-pencil"></span>
+        <span v-else class="lnr lnr-chevron-down-circle"></span>
+      </button>
     </div>
     <ul>
-      <li v-for="doge in doges" :key="doge in doges">
+      <li v-for="doge in doges" :key="doge">
         {{ doge }}
       </li>
       <button v-on:click="hiddenDogge">show me doge</button>
     </ul>
-    <img v-if="isDogeVisible" src="../assets/img/hiddenDoge.gif" alt="">
+    <img v-if="isDogeVisible" src="@/assets/img/hiddenDoge.gif" alt="">
   </div>
 </template>
 
@@ -26,14 +31,18 @@ export default {
       isDogeVisible: false,
       doges: [
         'click',
-        'for',
-        'doge',
+        'click',
+        'click',
       ],
+      isBioEditing: false,
     }
   },
   methods: {
     hiddenDogge() {
-      this.isDogeVisible = true
+      this.isDogeVisible = !this.isDogeVisible
+    },
+    editBio() {
+      this.isBioEditing = !this.isBioEditing
     },
   },
 }

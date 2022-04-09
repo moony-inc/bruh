@@ -2,19 +2,23 @@
   <div>
     <div class="MainPage">
       <Sidebar></Sidebar>
-      <UserProfile></UserProfile>
+      <Messages></Messages>
     </div>
   </div>
 </template>
 
 <script>
-import UserProfile from './UserProfile.vue'
 import Sidebar from './Sidebar.vue'
+import Messages from './Messages.vue'
 
 export default {
   components: {
-    UserProfile,
     Sidebar,
+    Messages,
+  },
+  data() {
+    return {
+    }
   },
 }
 </script>

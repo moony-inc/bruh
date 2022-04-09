@@ -5,10 +5,10 @@
       <p class="sidebar_username">{{ username }}</p>
     </div>
     <div class="sidebar_main">
-      <div class="sidebar_profile"><p>Profile</p></div>
-      <div class="sidebar_messages"><p>Messages</p></div>
-      <div class="sidebar_settings"><p>Settings</p></div>
-      <div class="sidebar_logout"><p>Log Out</p></div>
+      <div v-for="item in sidebar" :key="item.name">
+        <span :class="item.icon"></span>
+        {{ item.name }}
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +18,12 @@ export default {
   data() {
     return {
       username: 'John Doe',
+      sidebar: [
+        { name: 'Profile', icon: 'lnr lnr-user' },
+        { name: 'Messages', icon: 'lnr lnr-envelope' },
+        { name: 'Settings', icon: 'lnr lnr-eye' },
+        { name: 'Log Out', icon: 'lnr lnr-cross' },
+      ],
     }
   },
   methods: {
