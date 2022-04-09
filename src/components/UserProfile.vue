@@ -1,11 +1,17 @@
 <template>
-  <div>
-      <div class="userProfile_wrapper">
-          <div class="user_avatar-wrapper">
-              <img src="../img/user_blank.jpg" alt="" class="user_avatar">
-              <p>John Doe</p>
-          </div>
-      </div>
+  <div class="UserProfile">
+    <div class="user_avatar-wrapper">
+      <img src="@/assets/img/user_blank.jpg" alt="" class="user_avatar">
+      <p class="username">{{ username }}</p>
+    </div>
+    <div class="user_bio-wrapper">
+      <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
+      <input v-else v-model="user_bio" type="text">
+      <button @click="toggleBioEditing">
+        <span v-if="!isBioEditing" class="lnr lnr-pencil"></span>
+        <span v-else class="lnr lnr-chevron-down-circle"></span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -13,30 +19,49 @@
 export default {
   data() {
     return {
+      username: 'John Doe',
+      user_bio: 'I did not choose to be a doe, but i am a doe.',
+      isBioEditing: false,
     }
   },
   methods: {
+    toggleBioEditing() {
+      this.isBioEditing = !this.isBioEditing
+    },
   },
 }
 </script>
 
-<style lang="scss">
-  template {
-      margin: 0;
-  }
-  .userProfile_wrapper {
-      background-color: #c0c0c0;
+<style scoped lang="scss">
+  .UserProfile {
+    background-color: #c0c0c0;
+    width: 100%;
   }
   .user_avatar-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 3em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3em;
+    background-image: url(../assets/img/user_background.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .user_avatar {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  .username {
+    font-size: 34px;
+    user-select: none;
+    color: #fff;
+  }
+  .user_bio-wrapper {
+    display: flex;
+    padding: 0.3em 3em;
+    background-color: #313131;
+    color: #fff;
+    box-shadow: 0px 5px 10px 5px rgba($color: #181818, $alpha: 1.0);
   }
 </style>

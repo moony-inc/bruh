@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <UserProfile></UserProfile>
+    <MainPage></MainPage>
   </div>
 </template>
 
 <script>
-import UserProfile from './components/UserProfile.vue'
+import MainPage from '@/components/MainPage.vue'
 
 export default {
   name: 'App',
   components: {
-    UserProfile,
+    MainPage,
   },
 }
 </script>
+
+<style lang="scss">
+</style>
