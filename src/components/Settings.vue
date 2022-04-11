@@ -14,8 +14,6 @@ export default {
       username: 'John Doe',
     }
   },
-  methods: {
-  },
 }
 </script>
 

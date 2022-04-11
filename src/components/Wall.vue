@@ -17,8 +17,8 @@
             <img class="user_img-xs" src="@/assets/img/user_blank.jpg" alt="">
             <h2>{{ post.head }}</h2>
             <span
-            @click.prevent="deletePost(post.id)"
-            class="lnr lnr-cross-circle post_header-delete"
+              @click.prevent="deletePost(post.id)"
+              class="lnr lnr-cross-circle post_header-delete"
             ></span>
           </div>
           <hr>
@@ -34,7 +34,6 @@
 export default {
   data() {
     return {
-      userAvatar: '../assets/img/user_blank.jpg',
       postHead: '',
       postBody: '',
       posts: [],
