@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="MainPage">
-      <Sidebar></Sidebar>
-      <UserProfile></UserProfile>
+      <Sidebar @change-page="changePage($event)"></Sidebar>
+      <div class="mainPage_content">
+        <component :is="currentComponent"></component>
+      </div>
     </div>
   </div>
 </template>
@@ -10,15 +12,25 @@
 <script>
 import Sidebar from './Sidebar.vue'
 import UserProfile from './UserProfile.vue'
+import Messages from './Messages.vue'
+import Settings from './Settings.vue'
 
 export default {
   components: {
     Sidebar,
     UserProfile,
+    Messages,
+    Settings,
   },
   data() {
     return {
+      currentComponent: 'Messages',
     }
+  },
+  methods: {
+    changePage(currentComponent) {
+      this.currentComponent = currentComponent
+    },
   },
 }
 </script>
@@ -26,5 +38,8 @@ export default {
 <style lang="scss">
   .MainPage {
     display: flex;
+  }
+  .mainPage_content {
+    width: 100%;
   }
 </style>

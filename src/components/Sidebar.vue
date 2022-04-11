@@ -5,7 +5,12 @@
       <p class="sidebar_username">{{ username }}</p>
     </div>
     <div class="sidebar_main">
-      <div v-for="item in sidebarButtons" :key="item.name">
+      <div
+        class="sidebar_main-button"
+        v-for="item in sidebarButtons"
+        :key="item.name"
+        @click="setPage(item.page)"
+      >
         <span :class="item.icon"></span>
         {{ item.name }}
       </div>
@@ -19,14 +24,17 @@ export default {
     return {
       username: 'John Doe',
       sidebarButtons: [
-        { name: 'Profile', icon: 'lnr lnr-user' },
-        { name: 'Messages', icon: 'lnr lnr-envelope' },
-        { name: 'Settings', icon: 'lnr lnr-eye' },
-        { name: 'Log Out', icon: 'lnr lnr-cross' },
+        { name: 'Profile', icon: 'lnr lnr-user', page: 'UserProfile' },
+        { name: 'Messages', icon: 'lnr lnr-envelope', page: 'Messages' },
+        { name: 'Settings', icon: 'lnr lnr-eye', page: 'Settings' },
+        { name: 'Log Out', icon: 'lnr lnr-enter', page: null },
       ],
     }
   },
   methods: {
+    setPage(currentPage) {
+      this.$emit('change-page', currentPage)
+    },
   },
 }
 </script>
@@ -56,9 +64,8 @@ export default {
   .sidebar_main {
     display: flex;
     flex-direction: column;
-    & div {
-      font-size: 17px;
-      padding: 0 2em;
+    &-button {
+      padding: 0.5em 2em;
       color: rgb(199, 199, 199);
       transition: 300ms;
       user-select: none;
@@ -69,5 +76,6 @@ export default {
         color: #fff;
       }
     }
+
   }
 </style>
