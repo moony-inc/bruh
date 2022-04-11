@@ -14,8 +14,6 @@ export default {
       message: 'no messages',
     }
   },
-  methods: {
-  },
 }
 </script>
 
