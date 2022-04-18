@@ -8,14 +8,18 @@
 
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
-      <input
-        v-else
-        @keyup.enter="submitBio"
-        v-model.lazy="user_bio"
-        type="text"
-        class="user_bio-input"
-        :class="{ inputErrFilled: !isBioFilled, inputErrLength: !isBioLengthOk}"
-      >
+      <div v-else class="user_bio-inputWrapper">
+        <input
+          v-model.lazy="user_bio"
+          type="text"
+          class="user_bio-input"
+          :class="{ inputErr: !isBioFilled || !isBioLengthOk}"
+          @keyup.enter="submitBio"
+        >
+        <span v-if="!isBioFilled || !isBioLengthOk"
+          class="user_bio-inputErrMessage"
+        >{{ errMessage }}</span>
+      </div>
       <button
         v-if="!isBioEditing"
         @click="enableBioEditing"
@@ -52,7 +56,6 @@ export default {
       user_bio: 'I did not choose to be a doe, but i am a doe.',
       isBioEditing: false,
       isBioFilled: true,
-      bioCounter: 0,
       errMessage: '',
     }
   },
@@ -79,7 +82,6 @@ export default {
       } else if (!this.isBioLengthOk) {
         this.errMessage = 'Bio must be 50 symbols long'
       }
-      alert(this.errMessage)
     },
   },
 }
@@ -147,13 +149,21 @@ export default {
       background: transparent;
       border-bottom: 2px solid #fff;
       color: #fff;
-      width: 50%;
+      &Wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+        width: 90%;
+      }
+      &ErrMessage {
+        margin-top: 2px;
+        font-size: 0.6em;
+        color: #ff3c00;
+        position: absolute;
+        margin-bottom: 31px;
+      }
     }
   }
-  .inputErrFilled {
-    border-bottom: 2px solid red;
-  }
-  .inputErrLength {
-    border-bottom: 2px solid red;
+  .inputErr {
+    border-bottom: 2px solid #ff3c00;
   }
 </style>

@@ -120,32 +120,10 @@ export default {
         }
       }
     }
-    &_header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      & h2 {
-        margin: 0;
-      }
-      &-delete {
-        transition: 300ms;
-        &:hover {
-          transition: 300ms;
-          transform: scale(1.3);
-          cursor: pointer;
-        }
-      }
-    }
     &_list {
       list-style: none;
       display: flex;
       flex-direction: column-reverse;
     }
-  }
-  .user_img-xs {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 1em;
   }
 </style>

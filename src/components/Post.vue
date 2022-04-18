@@ -33,4 +33,28 @@ export default {
 </script>
 
 <style lang="scss">
+  .post {
+    &_header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      & h2 {
+        margin: 0;
+      }
+      &-delete {
+        transition: 300ms;
+        &:hover {
+          transition: 300ms;
+          transform: scale(1.3);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .user_img-xs {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1em;
+  }
 </style>
