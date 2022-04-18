@@ -43,9 +43,11 @@ export default {
   .Sidebar {
     height: 100vh;
     min-width: max-content;
-    width: 20vw;
+    width: 18vw;
     background-color: #181818;
-    resize: horizontal;
+    padding: 0.7em;
+    position: fixed;
+    left: 0;
   }
   .sidebar_header {
     display: flex;

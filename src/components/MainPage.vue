@@ -2,9 +2,7 @@
   <div>
     <div class="MainPage">
       <Sidebar @change-page="changePage($event)"></Sidebar>
-      <div class="mainPage_content">
-        <component :is="currentComponent"></component>
-      </div>
+      <component :is="currentComponent"></component>
     </div>
   </div>
 </template>
@@ -24,7 +22,7 @@ export default {
   },
   data() {
     return {
-      currentComponent: 'Messages',
+      currentComponent: 'UserProfile',
     }
   },
   methods: {
@@ -38,8 +36,9 @@ export default {
 <style lang="scss">
   .MainPage {
     display: flex;
-  }
-  .mainPage_content {
-    width: 100%;
+    &:last-child {
+      width: 80vw;
+      float: right;
+    }
   }
 </style>

@@ -8,10 +8,27 @@
 
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
-      <input v-else v-model="user_bio" type="text" class="user_bio-input">
-      <button @click="toggleBioEditing" class="user_bio-toggleEditBtn">
-        <span v-if="!isBioEditing" class="lnr lnr-pencil"></span>
-        <span v-else class="lnr lnr-chevron-down-circle"></span>
+      <input
+        v-else
+        @keyup.enter="submitBio"
+        v-model.lazy="user_bio"
+        type="text"
+        class="user_bio-input"
+        :class="{ inputErrFilled: !isBioFilled, inputErrLength: !isBioLengthOk}"
+      >
+      <button
+        v-if="!isBioEditing"
+        @click="enableBioEditing"
+        class="user_bio-toggleEditBtn"
+      >
+        <span class="lnr lnr-pencil"></span>
+      </button>
+      <button
+        v-else
+        @click="submitBio"
+        class="user_bio-toggleEditBtn"
+      >
+        <span class="lnr lnr-chevron-down-circle"></span>
       </button>
     </div>
 
@@ -23,6 +40,8 @@
 <script>
 import Wall from './Wall.vue'
 
+const MAX_BIO_LENGTH = 50
+
 export default {
   components: {
     Wall,
@@ -32,11 +51,35 @@ export default {
       username: 'John Doe',
       user_bio: 'I did not choose to be a doe, but i am a doe.',
       isBioEditing: false,
+      isBioFilled: true,
+      bioCounter: 0,
+      errMessage: '',
     }
   },
+  computed: {
+    isBioLengthOk() {
+      return this.user_bio.length <= MAX_BIO_LENGTH
+    },
+  },
   methods: {
-    toggleBioEditing() {
-      this.isBioEditing = !this.isBioEditing
+    enableBioEditing() {
+      this.isBioEditing = true
+    },
+    submitBio() {
+      this.isBioFilled = Boolean(this.user_bio)
+      if (this.isBioFilled && this.isBioLengthOk) {
+        this.isBioEditing = false
+      } else {
+        this.showErr()
+      }
+    },
+    showErr() {
+      if (!this.isBioFilled) {
+        this.errMessage = 'Please, fill bio'
+      } else if (!this.isBioLengthOk) {
+        this.errMessage = 'Bio must be 50 symbols long'
+      }
+      alert(this.errMessage)
     },
   },
 }
@@ -53,7 +96,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding-top: 3em;
-    background-image: url(../assets/img/user_background.webp);
+    background-image: url(../assets/img/user_background.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -76,7 +119,7 @@ export default {
       padding: 0em 3em;
       background-color: #313131;
       color: #fff;
-      box-shadow: 0px 5px 10px 5px rgba($color: #181818, $alpha: 1.0);
+      box-shadow: 5px 0px 10px 5px rgba($color: #000000, $alpha: 1.0);
     }
     &-text {
       margin: 0;
@@ -106,5 +149,11 @@ export default {
       color: #fff;
       width: 50%;
     }
+  }
+  .inputErrFilled {
+    border-bottom: 2px solid red;
+  }
+  .inputErrLength {
+    border-bottom: 2px solid red;
   }
 </style>

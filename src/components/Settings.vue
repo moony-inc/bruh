@@ -28,7 +28,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding-top: 3em;
-    background-image: url(../assets/img/user_background.webp);
+    background-image: url(../assets/img/user_background.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
