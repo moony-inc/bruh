@@ -8,18 +8,14 @@
 
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
-      <div v-else class="user_bio-inputWrapper">
         <input
-          v-model.lazy="user_bio"
+          v-else
+          v-model.lazy="$v.user_bio.$model"
           type="text"
           class="user_bio-input"
-          :class="{ inputErr: !isBioFilled || !isBioLengthOk}"
           @keyup.enter="submitBio"
         >
-        <span v-if="!isBioFilled || !isBioLengthOk"
-          class="user_bio-inputErrMessage"
-        >{{ errMessage }}</span>
-      </div>
+        <div v-if="errorMessage">{{ errorMessage }}</div>
       <button
         v-if="!isBioEditing"
         @click="enableBioEditing"
@@ -42,9 +38,11 @@
 </template>
 
 <script>
+import { errorMessages } from '@/utils/errors'
+import { required, maxLength } from 'vuelidate/lib/validators'
 import Wall from './Wall.vue'
 
-const MAX_BIO_LENGTH = 50
+const MAX_BIO_LENGTH = 13
 
 export default {
   components: {
@@ -53,15 +51,21 @@ export default {
   data() {
     return {
       username: 'John Doe',
-      user_bio: 'I did not choose to be a doe, but i am a doe.',
+      user_bio: 'Your bio here',
       isBioEditing: false,
-      isBioFilled: true,
-      errMessage: '',
     }
   },
+  validations: {
+    user_bio: {
+      required,
+      maxLength: maxLength(MAX_BIO_LENGTH),
+    },
+  },
   computed: {
-    isBioLengthOk() {
-      return this.user_bio.length <= MAX_BIO_LENGTH
+    errorMessage() {
+      const failedValidator = Object.keys(this.$v.user_bio).find((key) => !key.includes('$') && !this.$v.user_bio[key])
+
+      return errorMessages[failedValidator] || null
     },
   },
   methods: {
@@ -69,18 +73,8 @@ export default {
       this.isBioEditing = true
     },
     submitBio() {
-      this.isBioFilled = Boolean(this.user_bio)
-      if (this.isBioFilled && this.isBioLengthOk) {
+      if (!this.$v.user_bio.$error) {
         this.isBioEditing = false
-      } else {
-        this.showErr()
-      }
-    },
-    showErr() {
-      if (!this.isBioFilled) {
-        this.errMessage = 'Please, fill bio'
-      } else if (!this.isBioLengthOk) {
-        this.errMessage = 'Bio must be 50 symbols long'
       }
     },
   },
@@ -140,6 +134,7 @@ export default {
       }
     }
     &-input {
+      width: 80%;
       margin-top: 2px;
       margin-left: -2px;
       font-size: 20px;
@@ -149,21 +144,6 @@ export default {
       background: transparent;
       border-bottom: 2px solid #fff;
       color: #fff;
-      &Wrapper {
-        display: flex;
-        flex-direction: column-reverse;
-        width: 90%;
-      }
-      &ErrMessage {
-        margin-top: 2px;
-        font-size: 0.6em;
-        color: #ff3c00;
-        position: absolute;
-        margin-bottom: 31px;
-      }
     }
-  }
-  .inputErr {
-    border-bottom: 2px solid #ff3c00;
   }
 </style>
