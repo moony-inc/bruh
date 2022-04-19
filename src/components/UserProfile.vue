@@ -8,10 +8,27 @@
 
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
-      <input v-else v-model="user_bio" type="text" class="user_bio-input">
-      <button @click="toggleBioEditing" class="user_bio-toggleEditBtn">
-        <span v-if="!isBioEditing" class="lnr lnr-pencil"></span>
-        <span v-else class="lnr lnr-chevron-down-circle"></span>
+        <input
+          v-else
+          v-model.lazy="$v.user_bio.$model"
+          type="text"
+          class="user_bio-input"
+          @keyup.enter="submitBio"
+        >
+        <div v-if="errorMessage">{{ errorMessage }}</div>
+      <button
+        v-if="!isBioEditing"
+        @click="enableBioEditing"
+        class="user_bio-toggleEditBtn"
+      >
+        <span class="lnr lnr-pencil"></span>
+      </button>
+      <button
+        v-else
+        @click="submitBio"
+        class="user_bio-toggleEditBtn"
+      >
+        <span class="lnr lnr-chevron-down-circle"></span>
       </button>
     </div>
 
@@ -21,7 +38,11 @@
 </template>
 
 <script>
+import { errorMessages } from '@/utils/errors'
+import { required, maxLength } from 'vuelidate/lib/validators'
 import Wall from './Wall.vue'
+
+const MAX_BIO_LENGTH = 13
 
 export default {
   components: {
@@ -30,13 +51,31 @@ export default {
   data() {
     return {
       username: 'John Doe',
-      user_bio: 'I did not choose to be a doe, but i am a doe.',
+      user_bio: 'Your bio here',
       isBioEditing: false,
     }
   },
+  validations: {
+    user_bio: {
+      required,
+      maxLength: maxLength(MAX_BIO_LENGTH),
+    },
+  },
+  computed: {
+    errorMessage() {
+      const failedValidator = Object.keys(this.$v.user_bio).find((key) => !key.includes('$') && !this.$v.user_bio[key])
+
+      return errorMessages[failedValidator] || null
+    },
+  },
   methods: {
-    toggleBioEditing() {
-      this.isBioEditing = !this.isBioEditing
+    enableBioEditing() {
+      this.isBioEditing = true
+    },
+    submitBio() {
+      if (!this.$v.user_bio.$error) {
+        this.isBioEditing = false
+      }
     },
   },
 }
@@ -53,7 +92,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding-top: 3em;
-    background-image: url(../assets/img/user_background.webp);
+    background-image: url(../assets/img/user_background.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -76,7 +115,7 @@ export default {
       padding: 0em 3em;
       background-color: #313131;
       color: #fff;
-      box-shadow: 0px 5px 10px 5px rgba($color: #181818, $alpha: 1.0);
+      box-shadow: 5px 0px 10px 5px rgba($color: #000000, $alpha: 1.0);
     }
     &-text {
       margin: 0;
@@ -95,6 +134,7 @@ export default {
       }
     }
     &-input {
+      width: 80%;
       margin-top: 2px;
       margin-left: -2px;
       font-size: 20px;
@@ -104,7 +144,6 @@ export default {
       background: transparent;
       border-bottom: 2px solid #fff;
       color: #fff;
-      width: 50%;
     }
   }
 </style>
