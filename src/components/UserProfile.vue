@@ -10,12 +10,17 @@
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
         <input
           v-else
-          v-model.lazy="$v.user_bio.$model"
+          v-model="$v.user_bio.$model"
           type="text"
           class="user_bio-input"
           @keyup.enter="submitBio"
         >
-        <div v-if="errorMessage">{{ errorMessage }}</div>
+        <div v-if="errorMessage">{{ errorMessage }}
+        </div>
+        <div v-if="isBioEditing"
+          class="user_bio-counter"
+        >{{ bioCharsAmount + '/' + maxBioLength }}
+        </div>
       <button
         v-if="!isBioEditing"
         @click="enableBioEditing"
@@ -42,7 +47,7 @@ import { errorMessages } from '@/utils/errors'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import Wall from './Wall.vue'
 
-const MAX_BIO_LENGTH = 13
+const MAX_BIO_LENGTH = 50
 
 export default {
   components: {
@@ -53,6 +58,7 @@ export default {
       username: 'John Doe',
       user_bio: 'Your bio here',
       isBioEditing: false,
+      maxBioLength: MAX_BIO_LENGTH,
     }
   },
   validations: {
@@ -66,6 +72,11 @@ export default {
       const failedValidator = Object.keys(this.$v.user_bio).find((key) => !key.includes('$') && !this.$v.user_bio[key])
 
       return errorMessages[failedValidator] || null
+    },
+    bioCharsAmount() {
+      const charsAmount = this.$v.user_bio.$model.length
+
+      return charsAmount
     },
   },
   methods: {
