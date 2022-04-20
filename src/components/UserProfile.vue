@@ -8,14 +8,17 @@
 
     <div class="user_bio-wrapper">
       <p v-if="!isBioEditing" class="user_bio-text">{{ user_bio }}</p>
-        <input
-          v-else
-          v-model="$v.user_bio.$model"
-          type="text"
-          class="user_bio-input"
-          @keyup.enter="submitBio"
-        >
-        <div v-if="errorMessage">{{ errorMessage }}
+        <div v-else class="user_bio-inputWrapper">
+          <input
+            v-model="$v.user_bio.$model"
+            type="text"
+            class="user_bio-input"
+            :class="{ user_bioInputErr: this.$v.user_bio.$error }"
+            @keyup.enter="submitBio"
+          >
+          <div class="user_bio-err" v-if="errorMessage">
+            {{ errorMessage }}
+          </div>
         </div>
         <div v-if="isBioEditing"
           class="user_bio-counter"
@@ -95,7 +98,6 @@ export default {
 <style scoped lang="scss">
   .UserProfile {
     background-color: #c0c0c0;
-    width: 100%;
   }
   .user_avatar-wrapper {
     display: flex;
@@ -122,15 +124,19 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
-      padding: 0em 3em;
+      height: 35px;
+      padding: 1em 3em;
       background-color: #313131;
       color: #fff;
       box-shadow: 5px 0px 10px 5px rgba($color: #000000, $alpha: 1.0);
     }
+    &-inputWrapper {
+      width: 80%;
+    }
     &-text {
       margin: 0;
       user-select: none;
+      font-size: 17px;
     }
     &-toggleEditBtn {
       border: none;
@@ -145,16 +151,28 @@ export default {
       }
     }
     &-input {
-      width: 80%;
+      width: 100%;
       margin-top: 2px;
       margin-left: -2px;
-      font-size: 20px;
+      font-size: 17px;
       background: none;
       border: 0;
       outline: 0;
       background: transparent;
       border-bottom: 2px solid #fff;
       color: #fff;
+    }
+    &-counter {
+      font-size: 14px;
+    }
+    &InputErr {
+      border-bottom: 2px solid #ff2a00;
+    }
+    &-err {
+      font-size: 12px;
+      color: #ff2a00;
+      margin-bottom: -14px;
+      margin-top: 1px;
     }
   }
 </style>

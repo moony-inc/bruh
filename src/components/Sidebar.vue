@@ -1,8 +1,10 @@
 <template>
   <div class="Sidebar">
     <div class="sidebar_header">
-      <img src="@/assets/img/user_blank.jpg" alt="" class="user_img-sm">
-      <p class="sidebar_username">{{ username }}</p>
+      <img
+        src="@/assets/img/user_blank.jpg"
+        alt="" class="user_img-sm"
+        >
     </div>
     <div class="sidebar_main">
       <div
@@ -22,7 +24,6 @@
 export default {
   data() {
     return {
-      username: 'John Doe',
       sidebarButtons: [
         { name: 'Profile', icon: 'lnr lnr-user', page: 'UserProfile' },
         { name: 'Messages', icon: 'lnr lnr-envelope', page: 'Messages' },
@@ -43,15 +44,15 @@ export default {
   .Sidebar {
     height: 100vh;
     min-width: max-content;
-    width: 18vw;
     background-color: #181818;
-    padding: 0.7em;
+    padding: 0.7em 0.3em;
+    width: 6vw;
     position: fixed;
-    left: 0;
   }
   .sidebar_header {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   .sidebar_username {
     color: #fff;
@@ -61,16 +62,21 @@ export default {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin: 1em;
+    margin-bottom: 1em;
   }
   .sidebar_main {
     display: flex;
     flex-direction: column;
     &-button {
-      padding: 0.5em 2em;
+      padding: 0.5em;
       color: rgb(199, 199, 199);
       transition: 300ms;
       user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
       cursor: pointer;
       &:hover {
         transition: 300ms;
@@ -78,6 +84,9 @@ export default {
         color: #fff;
       }
     }
-
+    & span {
+      font-size: 2em;
+      margin: 0.2em 0;
+    }
   }
 </style>

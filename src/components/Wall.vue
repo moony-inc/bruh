@@ -65,11 +65,6 @@ export default {
     background-color: #cdcdcd;
   }
   .post {
-    background-color: #fff;
-    width: 70%;
-    padding: 0.5em 2em;
-    border-radius: 22px;
-    margin: 1em;
     &_form {
       display: flex;
       flex-direction: column;
@@ -85,7 +80,7 @@ export default {
       }
       & input, & textarea {
         width: 70%;
-        padding: 0.7em;
+        padding: 0.5em;
       }
       &-header {
         display: flex;
@@ -119,11 +114,6 @@ export default {
           transform: scale(1.05);
         }
       }
-    }
-    &_list {
-      list-style: none;
-      display: flex;
-      flex-direction: column-reverse;
     }
   }
 </style>

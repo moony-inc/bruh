@@ -2,7 +2,7 @@
   <div>
     <div class="MainPage">
       <Sidebar @change-page="changePage($event)"></Sidebar>
-      <component :is="currentComponent"></component>
+      <component class="mainPage_main" :is="currentComponent"></component>
     </div>
   </div>
 </template>
@@ -35,10 +35,10 @@ export default {
 
 <style lang="scss">
   .MainPage {
-    display: flex;
-    &:last-child {
-      width: 80vw;
-      float: right;
-    }
+    display: grid;
+    grid-template-columns: 7.2vw auto;
+  }
+  .mainPage_main {
+    grid-column-start: 2;
   }
 </style>
