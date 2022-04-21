@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="MainPage">
-      <Sidebar @change-page="changePage($event)"></Sidebar>
+      <Sidebar
+        :current-button="currentComponent"
+        @change-page="changePage($event)"
+      ></Sidebar>
       <component class="mainPage_main" :is="currentComponent"></component>
     </div>
   </div>
@@ -25,6 +28,15 @@ export default {
       currentComponent: 'UserProfile',
     }
   },
+  // watch: {
+  //   currentComponent: {
+  //     handler() {
+  //       this.$emit('change-current-page', this.currentComponent)
+  //     },
+  //     deep: false,
+  //     immediate: true,
+  //   },
+  // },
   methods: {
     changePage(currentComponent) {
       this.currentComponent = currentComponent
@@ -36,7 +48,7 @@ export default {
 <style lang="scss">
   .MainPage {
     display: grid;
-    grid-template-columns: 7.2vw auto;
+    grid-template-columns: 7.3vw auto;
   }
   .mainPage_main {
     grid-column-start: 2;
