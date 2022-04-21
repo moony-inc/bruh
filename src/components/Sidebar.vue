@@ -1,10 +1,7 @@
 <template>
   <div class="Sidebar">
     <div class="sidebar_header">
-      <img
-        src="@/assets/img/user_blank.jpg"
-        alt="" class="user_img-sm"
-        >
+      <img src="@/assets/img/user_blank.jpg" class="user_img-sm">
     </div>
     <div class="sidebar_main">
       <div

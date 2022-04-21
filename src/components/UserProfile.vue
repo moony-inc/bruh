@@ -20,9 +20,8 @@
             {{ errorMessage }}
           </div>
         </div>
-        <div v-if="isBioEditing"
-          class="user_bio-counter"
-        >{{ bioCharsAmount + '/' + maxBioLength }}
+        <div v-if="isBioEditing" class="user_bio-counter">
+          {{ user_bio.length + '/' + maxBioLength }}
         </div>
       <button
         v-if="!isBioEditing"
@@ -75,11 +74,6 @@ export default {
       const failedValidator = Object.keys(this.$v.user_bio).find((key) => !key.includes('$') && !this.$v.user_bio[key])
 
       return errorMessages[failedValidator] || null
-    },
-    bioCharsAmount() {
-      const charsAmount = this.$v.user_bio.$model.length
-
-      return charsAmount
     },
   },
   methods: {
