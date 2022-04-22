@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="post_listItem">
     <div class="post">
       <div class="post_header">
         <img class="user_img-xs" src="@/assets/img/user_blank.jpg" alt="">
@@ -34,6 +34,21 @@ export default {
 
 <style lang="scss">
   .post {
+    background-color: #fff;
+    width: 75%;
+    padding: 0.5em 2em;
+    border-radius: 22px;
+    margin: 1em;
+    &_list {
+      list-style: none;
+      display: flex;
+      flex-direction: column-reverse;
+      padding-left: 0;
+    }
+    &_listItem {
+      width: 100%;display: flex;
+      justify-content: center;
+    }
     &_header {
       display: flex;
       align-items: center;
